@@ -16,20 +16,26 @@ public class Main {
         for (int i = 0; i < n; i++) {
             array[i] = Rand.nextInt(n);
         }
-        System.out.println(Arrays.toString(array));
+        //System.out.println(Arrays.toString(array));
         System.out.println();
         long start1 = System.currentTimeMillis();
-       // ArraySort.arraySort(array);
+        ArraySort.arraySort(array);
 
         long end1 = System.currentTimeMillis();
-        System.out.println("Це зайняло: " + (end1 - start1) + " мілісекунд");
-     //   System.out.println(Arrays.toString(array));
-        MultiThreadShell multiThreadShell = new MultiThreadShell();
+        System.out.println("Однопоточне сортування: " + (end1 - start1) + " мілісекунд");
+
+        for (int i = 0; i < n; i++) {
+            array[i] = Rand.nextInt(n);
+        }
+        start1 = System.currentTimeMillis();
+        MultiThreadShell multiThreadShell = new MultiThreadShell(4); // кількість потоків
         try {
-            multiThreadShell.sortArray(array);
+            array = multiThreadShell.sortArray(array);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(Arrays.toString(array));
+        end1 = System.currentTimeMillis();
+        System.out.println("Багатопоточне сортування в 3 потоки: " + (end1 - start1) + " мілісекунд");
+        //System.out.println(Arrays.toString(array));
     }
 }

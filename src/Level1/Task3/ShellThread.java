@@ -15,18 +15,18 @@ public class ShellThread implements Runnable {
 
     public void arraySort() {
         int n = stop - start;
-        System.out.println(n);
-        for (int interval = n / 2; interval > 0; interval /= 2) {
-            for (int i = start; i < stop; i += 1) {
+        //  System.out.println(n);
+        for (int interval = start + n / 2; interval > 0; interval /= 2) {
+            for (int i = start + interval; i < start + n; i++) {
                 int temp = array[i];
                 int j;
-                for (j = i; j >= interval && array[j - interval] >
+                for (j = i; j >= start + interval && array[j - interval] >
                         temp; j -= interval)
                     array[j] = array[j - interval];
                 array[j] = temp;
             }
+            //System.out.println("start: " +start + " " + Arrays.toString(array));
         }
-        System.out.println(Arrays.toString(array));
     }
 
     @Override
